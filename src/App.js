@@ -1,42 +1,65 @@
 import React from 'react';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log('helo');
-  }
   state = {
-    count: 0,
-  }
-  add = () => {
-    console.log('add');
-    this.setState((current) => ({
-      count: current.count + 1,
-    }));
-  };
-  minus = () => {
-    console.log("minus");
-   this.setState((current) => ({
-     count: current.count - 1,
-   }));
+    isLoading: true,
+    movies: []
   };
   componentDidMount() {
-    console.log('component rendered');
-  }
-  componentDidUpdate() {
-    console.log("component update rendered");
+    setTimeout(() => {
+      this.setState({
+        isLoading: false,
+        book: true
+      });
+    }, 6000);
   }
   render() {
-    console.log('i am render');
+    const { isLoading } = this.state;
     return (
       <>
-        <h1> ----- {this.state.count}</h1>
-        <button onClick={this.add}>Add</button>
-        <button onClick={this.minus}>minus</button>
+      {isLoading ? "Loading" : "We are ready"}
       </>
-    );
+    )
   }
 }
+
+// class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     console.log('helo');
+//   }
+//   state = {
+//     count: 0,
+//   }
+//   add = () => {
+//     console.log('add');
+//     this.setState((current) => ({
+//       count: current.count + 1,
+//     }));
+//   };
+//   minus = () => {
+//     console.log("minus");
+//    this.setState((current) => ({
+//      count: current.count - 1,
+//    }));
+//   };
+//   componentDidMount() {
+//     console.log('component rendered');
+//   }
+//   componentDidUpdate() {
+//     console.log("component update rendered");
+//   }
+//   render() {
+//     console.log('i am render');
+//     return (
+//       <>
+//         <h1> ----- {this.state.count}</h1>
+//         <button onClick={this.add}>Add</button>
+//         <button onClick={this.minus}>minus</button>
+//       </>
+//     );
+//   }
+// }
 
 // const foodILike = [
 //   {
