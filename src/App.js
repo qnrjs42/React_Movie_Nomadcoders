@@ -1,13 +1,20 @@
 import React from 'react';
-import Potato from './Potato';
+
+const Food = ({ favorite }) => {
+return <h1>HELOO {favorite}</h1>;
+};
 
 const App = () => {
   return (
     <div>
       Hello
-      <Potato />
+      <Food favorite="potato" />
+      <Food favorite="sweet potato" />
+      <Food favorite="kimchi" />
+      <Food favorite="rice" />
     </div>
   );
 }
 
 export default App;
+
