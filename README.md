@@ -119,3 +119,50 @@ exact: 해당 컴포넌트만 출력
 
 exact가 있으면 path="/about"은 about 컴포넌트만 출력한다.
 ```
+
+---
+
+### Link
+
+- Link는 Router 밖에서 사용할 수 없다.
+- BrowserRouter와 HashRouter가 있는데 BrowserRouter는 url에 #이 붙지 않지만 github.io deploy할 때 번거롭고,
+- HashRouter는 url에 #이 붙지만 github.io deploy할 때 간편하다.
+
+```js
+import React from 'react';
+import { HashRouter, Route } from 'react-router-dom';
+
+import Navigation from './components/Navigation';
+import About from './routes/About';
+import Home from "./routes/Home";
+
+const App = () => {
+  return (
+    <HashRouter>
+      <Navigation />
+      <Route path="/" component={Home} exact />
+      <Route path="/about" component={About} exact />
+    </HashRouter>
+  );
+}
+
+export default App;
+```
+
+```js
+// components/Navigation.js
+
+import React from "react";
+import { Link } from 'react-router-dom';
+
+const Navigation = () => {
+  return (
+    <>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+    </>
+  );
+};
+
+export default Navigation;
+```

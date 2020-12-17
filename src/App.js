@@ -1,15 +1,17 @@
 import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
+import Navigation from './components/Navigation';
 import About from './routes/About';
 import Home from "./routes/Home";
 
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
+      <Navigation />
       <Route path="/" component={Home} exact />
       <Route path="/about" component={About} exact />
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
