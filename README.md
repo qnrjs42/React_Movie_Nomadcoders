@@ -79,3 +79,43 @@ Published
 **********************
 위의 로그가 뜨고난 후 https://qnrjs42.github.io/react_movie_nomadcoders/ 접속
 ```
+
+<br/>
+
+---
+
+## react-router-dom
+
+```js
+// App.js
+
+import React from 'react';
+import { HashRouter, Route } from 'react-router-dom';
+
+import About from './routes/About';
+import Home from "./routes/Home";
+
+const App = () => {
+  return (
+    <HashRouter>
+      <Route path="/" component={Home} exact />
+      <Route path="/about" component={About} exact />
+    </HashRouter>
+  );
+}
+
+export default App;
+```
+
+```js
+<Route path="/" component={Home} />
+<Route path="/about" component={About} />
+
+path: url 경로
+component: 컴포넌트
+exact: 해당 컴포넌트만 출력
+
+예를 들어 path="/about"일 때 exact가 없다면 "/" 경로와 "about" 경로를 동시에 컴포넌트들을 렌더링한다.
+
+exact가 있으면 path="/about"은 about 컴포넌트만 출력한다.
+```
