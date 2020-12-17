@@ -166,3 +166,139 @@ const Navigation = () => {
 
 export default Navigation;
 ```
+
+<br/>
+
+---
+
+### 리스트 - 상세보기
+
+```js
+// App.js
+
+import React from 'react';
+import { HashRouter, Route } from 'react-router-dom';
+
+import Navigation from './components/Navigation';
+import About from './routes/About';
+import Home from "./routes/Home";
+import Detail from "./routes/Detail";
+
+const App = () => {
+  return (
+    <HashRouter>
+      <Navigation />
+      <Route path="/" component={Home} exact />
+      <Route path="/about" component={About} exact />
+      <Route path="/movie-detail" component={Detail} exact />
+    </HashRouter>
+  );
+}
+
+export default App;
+```
+
+```js
+// components/Movies.js
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import "./Movie.css";
+
+const Movie = ({id, year, title, summary, poster, genres}) => {
+  return (
+    <Link to={{
+      pathname: '/movie-detail',
+      state: {
+        year,
+        title,
+        summary,
+        poster,
+        genres
+      }
+    }}>
+      <div className="movie">
+        <img src={poster} alt={title} title={title} />
+        <div className="movie__data">
+          <h3 className="movie__title">{title}</h3>
+          <h5 className="movie__year">{year}</h5>
+          <ul className="movie__genres">
+            {genres.map((genre, index) => (
+              <li key={index} className="genres__geres">
+                {genre}
+              </li>
+            ))}
+          </ul>
+          <p className="movie__summary">{summary.slice(0, 180)}...</p>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+Movie.propTypes = {
+  id: PropTypes.number.isRequired,
+  year: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  summary: PropTypes.string.isRequired,
+  poster: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+}
+
+export default Movie;
+```
+
+```js
+// 중요한 부분
+<Link to={{
+  pathname: '/movie-detail',
+  state: {
+    year,
+    title,
+    summary,
+    poster,
+    genres
+  }
+}}>
+
+...
+
+</Link>
+```
+
+```js
+// routes/Detail.js
+
+import React from "react";
+
+const Detail = (props) => {
+  console.log(props);
+  return (
+    <>
+      <span>hello?</span>
+    </>
+  );
+};
+
+export default Detail;
+```
+
+```json
+console.log(props);
+
+location.state {
+  genres: Array(5)
+    0: "Adventure"
+    1: "Animation"
+    2: "Comedy"
+    3: "Family"
+    4: "Fantasy"
+    length: 5
+    __proto__: Array(0)
+  poster: "https://yts.mx/assets/images/movies/the_croods_a_new_age_2020/medium-cover.jpg"
+  summary: "The prehistoric family the Croods are challenged by a rival family the Bettermans, who claim to be better and more evolved."
+  title: "The Croods: A New Age"
+}
+```
