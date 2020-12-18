@@ -1,13 +1,28 @@
 import React from "react";
 
 
-const Detail = (props) => {
-  console.log(props);
-  return (
-    <>
-      <span>hello?</span>
-    </>
-  );
-};
+class Detail extends React.Component {
+
+  componentDidMount() {
+    console.log(this.props);
+    const { location, history } = this.props;
+    if(!location.state) {
+      history.push('/');
+    }
+  }
+  render() {
+    const { location } = this.props;
+
+    if(location.state) {
+      return (
+        <>
+          <span>{location.state.title}</span>
+        </>
+      );
+    } else {
+      return null;
+    }
+  }
+}
 
 export default Detail;
